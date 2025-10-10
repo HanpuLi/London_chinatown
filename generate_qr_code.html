@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator for Interactive Map</title>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #FF6B6B;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .qr-section {
+            text-align: center;
+            margin: 30px 0;
+        }
+        #qrcode {
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border: 2px solid #FF6B6B;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        .download-btn {
+            background-color: #FF6B6B;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+        }
+        .download-btn:hover {
+            background-color: #FF5252;
+        }
+        .info {
+            background-color: #e8f5e8;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 5px solid #4ECDC4;
+        }
+        .file-path {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            word-break: break-all;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🍜 London Chinatown Interactive Map QR Code</h1>
+        
+        <div class="info">
+            <h3>📱 How to Use This QR Code</h3>
+            <p>1. Generate the QR code below</p>
+            <p>2. Download the QR code image</p>
+            <p>3. Insert into your PowerPoint presentation</p>
+            <p>4. During presentation, audience can scan to view interactive map</p>
+        </div>
+
+        <div class="qr-section">
+            <h3>🔗 Interactive Map File Path</h3>
+            <div class="file-path" id="filePath">
+                file:///Users/caitlye/Downloads/london_chinatown_final_report/interactive_map.html
+            </div>
+            
+            <button class="download-btn" onclick="generateQR()">Generate QR Code</button>
+            <button class="download-btn" onclick="downloadQR()">Download QR Code</button>
+            
+            <div id="qrcode"></div>
+        </div>
+
+        <div class="info">
+            <h3>📋 Instructions for PowerPoint</h3>
+            <ol>
+                <li>Insert → Pictures → This Device</li>
+                <li>Select the downloaded QR code image</li>
+                <li>Resize and position as needed</li>
+                <li>Add text: "Scan QR code to view interactive map"</li>
+                <li>During presentation, audience scans with phone</li>
+            </ol>
+        </div>
+
+        <div class="info">
+            <h3>🔧 Alternative: Online Version</h3>
+            <p>If you upload the HTML file to an online platform (GitHub Pages, Netlify, etc.), you can generate a QR code with the online URL instead of the local file path.</p>
+        </div>
+    </div>
+
+    <script>
+        let qrCanvas = null;
+
+        function generateQR() {
+            const filePath = document.getElementById('filePath').textContent;
+            const qrContainer = document.getElementById('qrcode');
+            
+            // Clear previous QR code
+            qrContainer.innerHTML = '';
+            
+            // Generate QR code
+            QRCode.toCanvas(qrContainer, filePath, {
+                width: 300,
+                height: 300,
+                colorDark: '#FF6B6B',
+                colorLight: '#ffffff',
+                correctLevel: QRCode.CorrectLevel.M
+            }, function (error) {
+                if (error) {
+                    console.error(error);
+                    qrContainer.innerHTML = '<p style="color: red;">Error generating QR code. Please try again.</p>';
+                } else {
+                    qrCanvas = qrContainer.querySelector('canvas');
+                }
+            });
+        }
+
+        function downloadQR() {
+            if (qrCanvas) {
+                const link = document.createElement('a');
+                link.download = 'interactive_map_qr_code.png';
+                link.href = qrCanvas.toDataURL();
+                link.click();
+            } else {
+                alert('Please generate QR code first!');
+            }
+        }
+
+        // Auto-generate QR code on page load
+        window.onload = function() {
+            generateQR();
+        };
+    </script>
+</body>
+</html>
