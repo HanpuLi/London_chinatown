@@ -35,37 +35,29 @@ london-chinatown-analysis/
 ├── comprehensive_analysis_report.html  # Main HTML report
 ├── interactive_map.html               # Interactive map
 ├── interactive_map_files/             # Map support files
-├── data/                              # 📊 Data Files
+├── data/
 │   ├── food_data.csv                  # Main dataset (146 records)
 │   ├── all_osm_rawdata.csv           # All OSM raw data (259 records)
 │   └── map_summary_for_ppt.csv       # Summary data for PPT
-├── visualizations/                    # 📈 Visualizations
+├── visualizations/
 │   ├── cultural_background_distribution.png
 │   ├── cuisine_distribution.png
 │   ├── business_type_distribution.png
 │   ├── london_chinatown_static_map_ppt.png
-│   ├── cultural_distribution_pie.png
-│   ├── london_chinatown_static_map.png
-│   └── Chinese-freemasons-1-726x445.jpg
-├── scripts/                           # 🔧 R Scripts
+│   └── cultural_distribution_pie.png
+├── scripts/
 │   ├── data_cleaning_script.R
 │   ├── cuisine_fix_script.R
 │   ├── visualization_script.R
 │   └── create_comprehensive_report.R
-├── geographic/                        # 🗺️ Geographic Data
+├── geographic/
 │   ├── kml_original.geojson
 │   └── kml_50m_buffer.geojson
-├── documentation/                     # 📚 Documentation
-│   ├── powerpoint_integration_guide.md
-│   ├── ppt_alternative_solutions.md
-│   ├── qr_code_instructions.md
-│   ├── embed_map_in_ppt_guide.md
-│   ├── github_upload_guide.md
-│   ├── github_auth_guide.md
-│   └── github_desktop_guide.md
-└── tools/                             # 🛠️ Tools
-    ├── generate_qr_code.html
-    └── ppt_static_map.html
+└── documentation/
+    ├── powerpoint_integration_guide.md
+    ├── ppt_alternative_solutions.md
+    ├── qr_code_instructions.md
+    └── embed_map_in_ppt_guide.md
 ```
 
 ## 🚀 Getting Started
@@ -214,4 +206,4 @@ For questions about this analysis or to request additional data processing, plea
 **Data Source:** OpenStreetMap  
 **Analysis Tool:** R Statistical Software  
 **Boundary:** KML Coordinates + 50m Buffer  
-**Total Records:** 146 Food & Beverage Establishments
+**Total Records:** 146 Food & Beverage Establishments# London_chinatown
