@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>London Chinatown Food & Beverage Analysis - Comprehensive Report</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #FF6B6B;
+        }
+        .header h1 {
+            color: #FF6B6B;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .header p {
+            font-size: 1.2em;
+            color: #666;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .section h2 {
+            color: #FF6B6B;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #FF6B6B;
+        }
+        .section h3 {
+            color: #4ECDC4;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+        .stat-card h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.2em;
+        }
+        .stat-card .number {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .stat-card .label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        .chart-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .chart-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .map-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .map-container iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .data-table th {
+            background-color: #FF6B6B;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+        }
+        .data-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .data-table tr:hover {
+            background-color: #f9f9f9;
+        }
+        .methodology {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #4ECDC4;
+        }
+        .methodology h3 {
+            color: #4ECDC4;
+            margin-top: 0;
+        }
+        .methodology ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .methodology li {
+            margin-bottom: 8px;
+        }
+        .conclusion {
+            background-color: #e8f5e8;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #45B7D1;
+        }
+        .conclusion h3 {
+            color: #45B7D1;
+            margin-top: 0;
+        }
+        .download-section {
+            background-color: #fff3cd;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #FF6B6B;
+            margin-top: 30px;
+        }
+        .download-section h3 {
+            color: #FF6B6B;
+            margin-top: 0;
+        }
+        .download-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .download-link {
+            background-color: #FF6B6B;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+        .download-link:hover {
+            background-color: #FF5252;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #FF6B6B;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🍜 London Chinatown Food & Beverage Analysis</h1>
+            <p>Comprehensive Diversity Analysis Report</p>
+            <p><strong>Analysis Date:</strong> October 10, 2025 | <strong>Data Source:</strong> OpenStreetMap | <strong>Boundary:</strong> KML Coordinates + 50m Buffer</p>
+        </div>
+
+        <div class="section">
+            <h2>📊 Executive Summary</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total Establishments</h3>
+                    <div class="number">146</div>
+                    <div class="label">Food & Beverage Businesses</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Chinese/Chinese Heritage</h3>
+                    <div class="number">77</div>
+                    <div class="label">52.7% of Total</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Other Asian</h3>
+                    <div class="number">19</div>
+                    <div class="label">13.0% of Total</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Other</h3>
+                    <div class="number">50</div>
+                    <div class="label">34.2% of Total</div>
+                </div>
+            </div>
+            
+            <p>This comprehensive analysis examines the cultural diversity of food and beverage establishments in London's Chinatown area. The study focuses on a precisely defined boundary using KML coordinates with a 50-meter buffer, ensuring accurate representation of the Chinatown district. The analysis reveals a rich culinary landscape with significant Chinese/Chinese Heritage representation alongside diverse international cuisines.</p>
+        </div>
+
+        <div class="section">
+            <h2>🎯 Key Findings</h2>
+            <div class="methodology">
+                <h3>Cultural Diversity Metrics</h3>
+                <ul>
+                    <li><strong>Cultural Simpson Diversity Index:</strong> 0.588 (moderate diversity)</li>
+                    <li><strong>Cultural Shannon Diversity Index:</strong> 0.97 (high diversity)</li>
+                    <li><strong>Cuisine Simpson Diversity Index:</strong> 0.599 (moderate diversity)</li>
+                    <li><strong>Cuisine Shannon Diversity Index:</strong> 1.86 (very high diversity)</li>
+                </ul>
+            </div>
+            
+            <h3>Major Insights</h3>
+            <ul>
+                <li><strong>Chinese Dominance:</strong> Chinese/Chinese Heritage establishments represent over half (52.7%) of all food and beverage businesses, confirming Chinatown's cultural identity.</li>
+                <li><strong>Asian Diversity:</strong> Other Asian cuisines (Japanese, Korean, Thai, Vietnamese, etc.) account for 13% of establishments, adding to the area's cultural richness.</li>
+                <li><strong>International Presence:</strong> Non-Asian establishments (34.2%) include Italian, American, Brazilian, and other international cuisines, reflecting London's cosmopolitan character.</li>
+                <li><strong>Cuisine Consolidation:</strong> All Chinese-related cuisines (Taiwanese, Sichuan, Cantonese, etc.) were merged into a single "Chinese" category for accurate representation.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>📈 Visual Analysis</h2>
+            
+            <h3>Cultural Background Distribution</h3>
+            <div class="chart-container">
+                <img src="cultural_background_distribution.png" alt="Cultural Background Distribution Pie Chart">
+            </div>
+            
+            <h3>Cuisine Distribution</h3>
+            <div class="chart-container">
+                <img src="cuisine_distribution.png" alt="Cuisine Distribution Bar Chart">
+            </div>
+            
+            <h3>Business Type Distribution</h3>
+            <div class="chart-container">
+                <img src="business_type_distribution.png" alt="Business Type Distribution Chart">
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🗺️ Interactive Map</h2>
+            <div class="map-container">
+                <iframe src="interactive_map.html" title="London Chinatown Interactive Map"></iframe>
+            </div>
+            <p><em>The interactive map shows all 146 food and beverage establishments within the KML boundary + 50m buffer. Chinese/Chinese Heritage businesses are marked in red, Other Asian in teal, and Other establishments in blue.</em></p>
+        </div>
+
+        <div class="section">
+            <h2>🔍 Detailed Breakdown</h2>
+            
+            <h3>Chinese/Chinese Heritage Establishments (77 businesses)</h3>
+            <p>This category includes restaurants, cafes, and food shops with Chinese cultural heritage, including:</p>
+            <ul>
+                <li>Traditional Chinese restaurants (New World, Golden Dragon, Imperial China)</li>
+                <li>Modern Chinese cuisine (Shanghai Modern, Bar Shu)</li>
+                <li>Chinese bakeries and confectioneries (Chinatown Bakery, Golden Gate Cake Shop)</li>
+                <li>Bubble tea and dessert shops (Molly Tea, Chatime, Meet Fresh)</li>
+                <li>Chinese hot pot and specialty restaurants (Shu Xiangge, Dumplings' Legend)</li>
+            </ul>
+            
+            <h3>Other Asian Establishments (19 businesses)</h3>
+            <p>Diverse Asian cuisines contributing to the area's multicultural character:</p>
+            <ul>
+                <li><strong>Japanese:</strong> Sushi restaurants, ramen shops, Japanese cafes</li>
+                <li><strong>Korean:</strong> Korean barbecue, modern Korean restaurants</li>
+                <li><strong>Thai:</strong> Traditional Thai restaurants, modern Thai cuisine</li>
+                <li><strong>Vietnamese:</strong> Pho restaurants, Vietnamese street food</li>
+                <li><strong>Other:</strong> Malaysian, Indonesian, and pan-Asian establishments</li>
+            </ul>
+            
+            <h3>Other Establishments (50 businesses)</h3>
+            <p>International cuisines and non-Asian restaurants:</p>
+            <ul>
+                <li><strong>European:</strong> Italian, Spanish, British pubs</li>
+                <li><strong>American:</strong> Burgers, steakhouses, American diners</li>
+                <li><strong>Latin American:</strong> Brazilian, Peruvian restaurants</li>
+                <li><strong>Other:</strong> International cuisine, dessert shops, cafes</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>📋 Methodology</h2>
+            <div class="methodology">
+                <h3>Data Collection</h3>
+                <ul>
+                    <li><strong>Source:</strong> OpenStreetMap (OSM) data via Overpass API</li>
+                    <li><strong>Boundary:</strong> KML coordinates provided by user + 50-meter buffer</li>
+                    <li><strong>Filtering:</strong> Food and beverage establishments only (restaurant, cafe, bar, pub, fast_food, ice_cream, bakery, confectionery, pastry, food)</li>
+                    <li><strong>Coordinates:</strong> Real OSM coordinates, not simulated</li>
+                </ul>
+                
+                <h3>Data Processing</h3>
+                <ul>
+                    <li><strong>Cuisine Consolidation:</strong> Merged all Chinese-related cuisines (Taiwanese, Sichuan, Cantonese, etc.) into "Chinese" category</li>
+                    <li><strong>Cultural Classification:</strong> Multi-dimensional approach using name, cuisine, Chinese name (name.zh), and business type</li>
+                    <li><strong>Quality Control:</strong> Removed non-business amenities (theatre, casino, etc.) and entries with missing essential data</li>
+                    <li><strong>Inference:</strong> Applied intelligent cuisine inference for entries with missing cuisine data</li>
+                </ul>
+                
+                <h3>Analysis Framework</h3>
+                <ul>
+                    <li><strong>Diversity Indices:</strong> Simpson and Shannon diversity indices for cultural and cuisine diversity</li>
+                    <li><strong>Visualization:</strong> Interactive maps, pie charts, and bar charts for comprehensive data presentation</li>
+                    <li><strong>Geographic Precision:</strong> KML-based boundary definition with spatial filtering</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📊 Data Quality & Limitations</h2>
+            <h3>Strengths</h3>
+            <ul>
+                <li><strong>Comprehensive Coverage:</strong> 146 establishments provide robust sample size</li>
+                <li><strong>Geographic Precision:</strong> KML-based boundary ensures accurate area definition</li>
+                <li><strong>Real Coordinates:</strong> All locations use actual OSM coordinates</li>
+                <li><strong>Cultural Sensitivity:</strong> Proper classification of Chinese/Chinese Heritage businesses</li>
+                <li><strong>Data Integrity:</strong> Rigorous filtering and quality control processes</li>
+            </ul>
+            
+            <h3>Limitations</h3>
+            <ul>
+                <li><strong>OSM Dependency:</strong> Data quality depends on OpenStreetMap completeness</li>
+                <li><strong>Temporal Snapshot:</strong> Analysis represents a specific point in time</li>
+                <li><strong>Classification Subjectivity:</strong> Some cultural classifications may require local knowledge</li>
+                <li><strong>Missing Data:</strong> Some establishments may have incomplete OSM entries</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>🎯 Conclusions</h2>
+            <div class="conclusion">
+                <h3>Key Takeaways</h3>
+                <ul>
+                    <li><strong>Cultural Identity:</strong> London Chinatown maintains strong Chinese cultural identity with 52.7% Chinese/Chinese Heritage establishments</li>
+                    <li><strong>Diversity Balance:</strong> The area successfully balances cultural authenticity with international diversity</li>
+                    <li><strong>Culinary Richness:</strong> High cuisine diversity (Shannon Index: 1.86) reflects London's cosmopolitan character</li>
+                    <li><strong>Geographic Coherence:</strong> Precise boundary definition reveals concentrated cultural clustering</li>
+                    <li><strong>Evolutionary Pattern:</strong> Mix of traditional and modern establishments shows cultural adaptation</li>
+                </ul>
+                
+                <h3>Implications</h3>
+                <ul>
+                    <li><strong>Tourism:</strong> Rich culinary diversity makes Chinatown a major tourist destination</li>
+                    <li><strong>Cultural Preservation:</strong> Strong Chinese presence helps maintain cultural heritage</li>
+                    <li><strong>Economic Vitality:</strong> Diverse food scene supports local economy and employment</li>
+                    <li><strong>Urban Planning:</strong> Analysis can inform future development and preservation strategies</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="download-section">
+            <h3>📁 Download Complete Dataset & Analysis</h3>
+            <p>Access all data files, scripts, and visualizations used in this analysis:</p>
+            <div class="download-links">
+                <a href="food_data.csv" class="download-link">Food Data (CSV)</a>
+                <a href="all_osm_rawdata.csv" class="download-link">All OSM Raw Data (CSV)</a>
+                <a href="data_cleaning_script.R" class="download-link">Data Cleaning Script (R)</a>
+                <a href="cuisine_fix_script.R" class="download-link">Cuisine Fix Script (R)</a>
+                <a href="visualization_script.R" class="download-link">Visualization Script (R)</a>
+                <a href="kml_original.geojson" class="download-link">Original KML Boundary</a>
+                <a href="kml_50m_buffer.geojson" class="download-link">50m Buffer Boundary</a>
+                <a href="interactive_map.html" class="download-link">Interactive Map (HTML)</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>London Chinatown Food & Beverage Analysis</strong></p>
+            <p>Generated on October 10, 2025 | Data Source: OpenStreetMap | Analysis Tool: R Statistical Software</p>
+            <p>This report provides a comprehensive analysis of cultural diversity in London Chinatown's food and beverage sector.</p>
+        </div>
+    </div>
+</body>
+</html>
