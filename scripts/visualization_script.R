@@ -9,13 +9,17 @@ library(sf)
 
 cat("=== Creating Final Food-Only Visualization ===\n")
 
-# Read cleaned food data
-data <- read.csv("london_chinatown_food_only_cleaned.csv", stringsAsFactors = FALSE)
+build_dir <- Sys.getenv("LONDON_CHINATOWN_BUILD_DIR", unset = "build")
+visual_dir <- file.path(build_dir, "visualizations")
+dir.create(visual_dir, recursive = TRUE, showWarnings = FALSE)
+
+# Read the classified data produced by the first two pipeline stages.
+data <- read.csv(file.path(build_dir, "food_data.csv"), stringsAsFactors = FALSE)
 cat("Cleaned food data loaded successfully,", nrow(data), "records\n")
 
-# Read the KML buffered polygon
-kml_buffer <- st_read("chinatown_kml_50m_buffer.geojson")
-kml_original <- st_read("chinatown_kml_original.geojson")
+# Read the versioned geographic boundaries.
+kml_buffer <- st_read("geographic/kml_50m_buffer.geojson", quiet = TRUE)
+kml_original <- st_read("geographic/kml_original.geojson", quiet = TRUE)
 
 # Define colors
 colors <- c("Chinese/Chinese Heritage" = "#FF6B6B", "Other Asian" = "#4ECDC4", "Other" = "#45B7D1")
@@ -220,20 +224,20 @@ cat("Starting to create food-only visualizations...\n")
 
 # 1. Save individual charts
 pie_chart <- create_culture_pie()
-ggsave("food_only_culture_distribution_pie_en.png", pie_chart, width = 10, height = 8, dpi = 300)
+ggsave(file.path(visual_dir, "cultural_background_distribution.png"), pie_chart, width = 10, height = 8, dpi = 300)
 
 bar_chart <- create_cuisine_bar()
-ggsave("food_only_cuisine_distribution_bar_en.png", bar_chart, width = 12, height = 8, dpi = 300)
+ggsave(file.path(visual_dir, "cuisine_distribution.png"), bar_chart, width = 12, height = 8, dpi = 300)
 
 # 2. Create interactive map
 map <- create_food_interactive_map()
-saveWidget(map, "london_chinatown_food_only_map_en.html", selfcontained = FALSE)
+saveWidget(map, file.path(visual_dir, "interactive_map.html"), selfcontained = FALSE)
 
 cat("\n=== Food-Only Visualizations Created Successfully ===\n")
-cat("Generated files:\n")
-cat("- food_only_culture_distribution_pie_en.png - Food-only cultural background distribution pie chart\n")
-cat("- food_only_cuisine_distribution_bar_en.png - Food-only cuisine distribution bar chart\n")
-cat("- london_chinatown_food_only_map_en.html - Food-only interactive map\n")
+cat("Generated files in", visual_dir, ":\n")
+cat("- cultural_background_distribution.png - Food-only cultural background distribution pie chart\n")
+cat("- cuisine_distribution.png - Food-only cuisine distribution bar chart\n")
+cat("- interactive_map.html - Food-only interactive map\n")
 
 # Calculate diversity indices
 calculate_simpson_diversity <- function(categories) {
@@ -279,7 +283,7 @@ cat("4. Chinese/Chinese Heritage businesses represent", round(prop.table(table(d
 cat("5. This provides a focused view of Chinatown's culinary landscape\n")
 cat("6. All coordinates are real OSM coordinates within precise KML boundary\n")
 
-return(list(
+invisible(list(
   pie_chart = pie_chart,
   bar_chart = bar_chart,
   map = map,

@@ -3,7 +3,8 @@
 .RData
 .Ruserdata
 
-# Temporary files
+# Temporary/generated files
+build/
 *.tmp
 *.temp
 *~

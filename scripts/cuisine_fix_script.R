@@ -3,8 +3,12 @@ library(dplyr)
 
 cat("=== Fixing Cuisine Classification ===\n")
 
-# Read the current food data
-data <- read.csv("london_chinatown_food_only_cleaned.csv", stringsAsFactors = FALSE)
+build_dir <- Sys.getenv("LONDON_CHINATOWN_BUILD_DIR", unset = "build")
+dir.create(build_dir, recursive = TRUE, showWarnings = FALSE)
+
+# Read the output of data_cleaning_script.R.
+cleaned_path <- file.path(build_dir, "food_only_cleaned.csv")
+data <- read.csv(cleaned_path, stringsAsFactors = FALSE)
 cat("Current food data loaded:", nrow(data), "records\n")
 
 # Show current cuisine distribution
@@ -144,8 +148,9 @@ for (i in 1:min(20, nrow(chinese_businesses))) {
 }
 
 # Save fixed data
-write.csv(data, "london_chinatown_food_cuisine_fixed.csv", row.names = FALSE, fileEncoding = "UTF-8")
-cat("\nFixed cuisine data saved to: london_chinatown_food_cuisine_fixed.csv\n")
+final_path <- file.path(build_dir, "food_data.csv")
+write.csv(data, final_path, row.names = FALSE, fileEncoding = "UTF-8")
+cat("\nFixed cuisine data saved to:", final_path, "\n")
 
 cat("\n=== Key Fixes Applied ===\n")
 cat("1. Merged all Chinese cuisine variants to 'chinese':\n")
@@ -162,4 +167,4 @@ cat("   - shanghai → chinese\n")
 cat("2. Updated cultural classification based on fixed cuisine\n")
 cat("3. Maintained other cuisines as separate categories\n")
 
-return(data)
+invisible(data)
