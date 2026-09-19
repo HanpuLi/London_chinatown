@@ -30,10 +30,10 @@ This comprehensive analysis examines the cultural diversity of food and beverage
 ## 📁 Repository Structure
 
 ```
-london-chinatown-analysis/
+London_chinatown/
 ├── README.md                           # This file
-├── comprehensive_analysis_report.html  # Main HTML report
-├── interactive_map.html               # Interactive map
+├── reports/comprehensive_analysis_report.html  # Main HTML report
+├── reports/interactive_map.html               # Interactive map
 ├── interactive_map_files/             # Map support files
 ├── data/
 │   ├── food_data.csv                  # Main dataset (146 records)
@@ -63,7 +63,7 @@ london-chinatown-analysis/
 ## 🚀 Getting Started
 
 ### 1. View the Report
-Open `comprehensive_analysis_report.html` in your web browser to see the complete analysis with interactive visualizations.
+Open `reports/comprehensive_analysis_report.html` in your web browser to see the complete analysis with interactive visualizations.
 
 ### 2. Explore the Data
 - **Main Dataset:** `data/food_data.csv` contains 146 cleaned food & beverage establishments
@@ -155,7 +155,7 @@ Run the R scripts in the `scripts/` folder in this order:
 - High resolution (300 DPI) for printing
 
 ### Interactive Elements
-- Generate QR code linking to `interactive_map.html`
+- Generate QR code linking to `reports/interactive_map.html`
 - Insert QR code into PowerPoint
 - Audience scans to view interactive map
 

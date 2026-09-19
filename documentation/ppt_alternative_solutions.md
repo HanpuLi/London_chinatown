@@ -26,7 +26,7 @@ PowerPoint不支持直接嵌入HTML文件，但我们可以提供多种替代方
 ## 🎬 方案二：录制视频演示
 
 ### 步骤
-1. 打开 `interactive_map.html`
+1. 打开 `reports/interactive_map.html`
 2. 使用屏幕录制软件录制操作
 3. 插入PPT作为视频
 4. 设置自动播放或点击播放
@@ -94,7 +94,7 @@ PowerPoint不支持直接嵌入HTML文件，但我们可以提供多种替代方
 - `food_data.csv` - 完整数据
 
 ### 交互文件
-- `interactive_map.html` - 完整交互式地图
+- `reports/interactive_map.html` - 完整交互式地图
 - `ppt_static_map.html` - 简化版地图
 
 ## 🎯 最佳实践建议

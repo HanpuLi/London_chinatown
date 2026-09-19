@@ -8,14 +8,14 @@
 
 ### 步骤：
 1. **截图地图**
-   - 打开 `interactive_map.html`
+   - 打开 `reports/interactive_map.html`
    - 使用截图工具截取地图区域
    - 保存为高质量PNG/JPG
 
 2. **插入PPT**
    - 在PPT中插入截图
    - 右键点击图片 → "超链接"
-   - 链接到 `interactive_map.html` 文件
+   - 链接到 `reports/interactive_map.html` 文件
 
 3. **优势**
    - ✅ 简单易用
@@ -133,7 +133,7 @@
 ## 📁 文件准备
 
 确保以下文件在同一文件夹中：
-- `interactive_map.html`
+- `reports/interactive_map.html`
 - `interactive_map_files/` 文件夹
 - PowerPoint演示文稿
 - 地图截图 (可选)
