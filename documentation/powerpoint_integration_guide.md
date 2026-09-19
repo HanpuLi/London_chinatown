@@ -12,7 +12,7 @@
 #### 步骤2：插入到PPT
 1. 在PowerPoint中插入截图
 2. 右键点击图片 → "超链接"
-3. 链接到 `interactive_map.html` 文件
+3. 链接到 `reports/interactive_map.html` 文件
 4. 设置链接文字为 "点击查看交互式地图"
 
 #### 步骤3：演示设置
@@ -88,7 +88,7 @@
 ## 📋 完整文件清单
 
 确保以下文件在同一文件夹中：
-- `interactive_map.html` - 完整交互式地图
+- `reports/interactive_map.html` - 完整交互式地图
 - `interactive_map_files/` - 地图支持文件
 - `ppt_static_map.html` - 简化版地图（用于截图）
 - `map_summary_for_ppt.csv` - 数据摘要

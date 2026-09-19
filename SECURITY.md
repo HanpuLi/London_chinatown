@@ -1,14 +1,15 @@
 # Security policy
 
-This is a research/data repository rather than a service that accepts credentials or executes untrusted user input. Security concerns still include accidental publication of credentials, private source material, unsafe workflow changes and supply-chain changes in GitHub Actions.
+This repository is a static research site and reproducibility archive rather than a service that accepts credentials or executes untrusted user input. Security-sensitive findings include accidentally published credentials or personal machine data, unsafe third-party script/workflow changes, and repository changes that cause the public report to load assets from unintended locations.
 
 ## Reporting
 
-Use GitHub private vulnerability reporting for security-sensitive findings. Do not paste credentials or private data into public issues.
+Use GitHub private vulnerability reporting for security-sensitive findings. Do not include personal data or credentials in a public issue. The latest `main` branch receives fixes.
 
 ## Repository boundary
 
 - Generated pipeline output belongs under ignored `build/`.
-- CI must use least-privilege permissions and commit-pinned third-party actions.
+- CI uses least-privilege permissions and commit-pinned third-party actions.
 - A fresh network data pull must not silently replace the archived 10 October 2025 OSM snapshot.
-- Changes that alter classification totals should be treated as research-result changes and reviewed against `REPRODUCIBILITY.md`.
+- Changes that alter classification totals are research-result changes and should be reviewed against `REPRODUCIBILITY.md`.
+- Local HTML references in the public report are checked so accidental missing or escaping paths fail CI.

@@ -10,7 +10,7 @@
 2. **添加现有仓库**
    - 打开GitHub Desktop
    - 点击 "Add an Existing Repository from your Hard Drive"
-   - 选择文件夹：`/Users/caitlye/Downloads/london_chinatown_final_report`
+   - 选择文件夹：`~/Downloads/london_chinatown_final_report`
 
 3. **推送代码**
    - 点击 "Publish repository" 或 "Push origin"

@@ -72,7 +72,7 @@
 2. **添加现有仓库**
    - 打开GitHub Desktop
    - 点击 "Add an Existing Repository from your Hard Drive"
-   - 选择 `/Users/caitlye/Downloads/london_chinatown_final_report` 文件夹
+   - 选择 `~/Downloads/london_chinatown_final_report` 文件夹
 
 3. **推送代码**
    - 点击 "Publish repository"
@@ -90,7 +90,7 @@
 
 2. **推送代码**
    ```bash
-   cd /Users/caitlye/Downloads/london_chinatown_final_report
+   cd ~/Downloads/london_chinatown_final_report
    git push -u origin main
    ```
    - 用户名：`LyundipLye`
@@ -127,8 +127,8 @@
 - 选择 "main" 分支
 
 ### 2. 访问在线版本
-- 报告：`https://lyundiplye.github.io/London_chinatown/comprehensive_analysis_report.html`
-- 地图：`https://lyundiplye.github.io/London_chinatown/interactive_map.html`
+- 报告：`https://hanpuli.github.io/London_chinatown/reports/comprehensive_analysis_report.html`
+- 地图：`https://hanpuli.github.io/London_chinatown/reports/interactive_map.html`
 
 ### 3. 更新README
 - 添加在线链接
