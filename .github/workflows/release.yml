@@ -1,0 +1,47 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: r-lib/actions/setup-r@465b7d8e732ca3921382b1674c59bada9cbf3399 # v2
+      - name: Tag/version guard
+        run: test "v$(tr -d '[:space:]' < VERSION)" = "$GITHUB_REF_NAME"
+      - name: Repository and data invariants
+        run: python3 tools/check_repository.py
+      - name: Parse R sources
+        run: |
+          set -euo pipefail
+          for f in scripts/*.R; do Rscript -e "parse(file='$f')" >/dev/null; done
+          bash -n scripts/run_pipeline.sh
+      - name: Reproduce archived classification baseline
+        run: |
+          Rscript -e 'install.packages("dplyr", repos="https://cloud.r-project.org")'
+          Rscript scripts/data_cleaning_script.R
+          Rscript scripts/cuisine_fix_script.R
+          python3 tools/check_reproduction.py build/food_data.csv
+
+  github-release:
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - name: Create source snapshot release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME"             --repo "$GITHUB_REPOSITORY"             --verify-tag             --title "London Chinatown analysis $GITHUB_REF_NAME"             --notes "Citable source/data snapshot of the archived 10 October 2025 OSM analysis. See LICENSING.md for mixed rights and provenance."

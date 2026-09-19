@@ -18,6 +18,10 @@ The archived cultural Simpson diversity index is 0.588 and the Shannon index is 
 
 These are results for the archived 10 October 2025 OSM snapshot, not claims about the current composition of Chinatown.
 
+The citable repository snapshot is **v2026.09.19**. See [CITATION.cff](CITATION.cff),
+[CHANGELOG.md](CHANGELOG.md), and [LICENSING.md](LICENSING.md) before reusing the
+analysis, data, figures, or third-party images.
+
 ## What is published
 
 - **Interactive site:** `index.html` and `interactive_map_files/`.

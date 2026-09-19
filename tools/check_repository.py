@@ -22,6 +22,9 @@ REQUIRED = [
     "REPRODUCIBILITY.md",
     "LICENSING.md",
     "SECURITY.md",
+    "CITATION.cff",
+    "CHANGELOG.md",
+    "VERSION",
     "index.html",
     "reports/comprehensive_analysis_report.html",
     "reports/interactive_map.html",
@@ -142,6 +145,16 @@ for script in (ROOT / "scripts").glob("*.R"):
     for stale in stale_inputs:
         if f'"{stale}"' in text:
             errors.append(f"{script.relative_to(ROOT)} still references obsolete root input {stale}")
+
+version = (ROOT / "VERSION").read_text().strip() if (ROOT / "VERSION").exists() else None
+citation = (ROOT / "CITATION.cff").read_text(encoding="utf-8") if (ROOT / "CITATION.cff").exists() else ""
+readme = (ROOT / "README.md").read_text(encoding="utf-8")
+if version != "2026.09.19":
+    errors.append(f"unexpected release snapshot version: {version!r}")
+if f'version: "{version}"' not in citation or 'date-released: "2026-09-19"' not in citation:
+    errors.append("CITATION.cff release metadata does not match VERSION/release date")
+if "v2026.09.19" not in readme:
+    errors.append("README does not identify the citable release snapshot")
 
 if errors:
     raise SystemExit("\n".join(errors))
