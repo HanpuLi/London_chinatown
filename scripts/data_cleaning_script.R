@@ -3,8 +3,11 @@ library(dplyr)
 
 cat("=== Cleaning and Merging Food Data ===\n")
 
-# Read all OSM raw data
-data <- read.csv("london_chinatown_all_osm_rawdata.csv", stringsAsFactors = FALSE)
+build_dir <- Sys.getenv("LONDON_CHINATOWN_BUILD_DIR", unset = "build")
+dir.create(build_dir, recursive = TRUE, showWarnings = FALSE)
+
+# Read the archived OSM snapshot from the repository.
+data <- read.csv("data/all_osm_rawdata.csv", stringsAsFactors = FALSE)
 cat("All OSM raw data loaded:", nrow(data), "records\n")
 
 # 1. Filter for food-related businesses only
@@ -259,8 +262,9 @@ for (i in 1:nrow(other_businesses)) {
 }
 
 # Save cleaned food data
-write.csv(food_data, "london_chinatown_food_only_cleaned.csv", row.names = FALSE, fileEncoding = "UTF-8")
-cat("\nCleaned food data saved to: london_chinatown_food_only_cleaned.csv\n")
+cleaned_path <- file.path(build_dir, "food_only_cleaned.csv")
+write.csv(food_data, cleaned_path, row.names = FALSE, fileEncoding = "UTF-8")
+cat("\nCleaned food data saved to:", cleaned_path, "\n")
 
 cat("\n=== Key Changes Made ===\n")
 cat("1. Filtered for food-related businesses only (restaurant, cafe, bar, pub, fast_food, ice_cream, bakery, confectionery, pastry, food)\n")
@@ -271,4 +275,4 @@ cat("   - Kept other cuisines as is\n")
 cat("4. Inferred cuisine from names for NA entries\n")
 cat("5. Applied cultural classification based on cleaned cuisine and names\n")
 
-return(food_data)
+invisible(food_data)

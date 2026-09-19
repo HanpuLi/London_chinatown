@@ -11,13 +11,17 @@ library(rmarkdown)
 
 cat("=== Creating Comprehensive London Chinatown Food Analysis Report ===\n")
 
-# Read the fixed food data
-data <- read.csv("london_chinatown_food_cuisine_fixed.csv", stringsAsFactors = FALSE)
+build_dir <- Sys.getenv("LONDON_CHINATOWN_BUILD_DIR", unset = "build")
+report_folder <- file.path(build_dir, "report")
+dir.create(report_folder, recursive = TRUE, showWarnings = FALSE)
+
+# Read the classified data produced by the first two pipeline stages.
+data <- read.csv(file.path(build_dir, "food_data.csv"), stringsAsFactors = FALSE)
 cat("Fixed food data loaded:", nrow(data), "records\n")
 
-# Read the KML boundaries
-kml_buffer <- st_read("chinatown_kml_50m_buffer.geojson")
-kml_original <- st_read("chinatown_kml_original.geojson")
+# Read the versioned geographic boundaries.
+kml_buffer <- st_read("geographic/kml_50m_buffer.geojson", quiet = TRUE)
+kml_original <- st_read("geographic/kml_original.geojson", quiet = TRUE)
 
 # Define colors
 colors <- c("Chinese/Chinese Heritage" = "#FF6B6B", "Other Asian" = "#4ECDC4", "Other" = "#45B7D1")
@@ -316,9 +320,7 @@ map <- create_enhanced_interactive_map()
 # Calculate diversity indices
 diversity <- calculate_diversity_indices()
 
-# Save all files to the report folder
-report_folder <- "london_chinatown_final_report"
-
+# Save all files to the report folder created at startup.
 # Save charts
 ggsave(file.path(report_folder, "cultural_background_distribution.png"), pie_chart, width = 12, height = 10, dpi = 300)
 ggsave(file.path(report_folder, "cuisine_distribution.png"), bar_chart, width = 14, height = 10, dpi = 300)
@@ -327,21 +329,19 @@ ggsave(file.path(report_folder, "business_type_distribution.png"), type_chart, w
 # Save interactive map
 saveWidget(map, file.path(report_folder, "interactive_map.html"), selfcontained = FALSE)
 
-# Copy CSV files
-file.copy("london_chinatown_food_cuisine_fixed.csv", file.path(report_folder, "food_data.csv"))
-file.copy("london_chinatown_all_osm_rawdata.csv", file.path(report_folder, "all_osm_rawdata.csv"))
+# Copy versioned data and current pipeline sources into the generated report.
+file.copy(file.path(build_dir, "food_data.csv"), file.path(report_folder, "food_data.csv"), overwrite = TRUE)
+file.copy("data/all_osm_rawdata.csv", file.path(report_folder, "all_osm_rawdata.csv"), overwrite = TRUE)
 
-# Copy R scripts
-file.copy("clean_and_merge_food_data.R", file.path(report_folder, "data_cleaning_script.R"))
-file.copy("fix_cuisine_classification.R", file.path(report_folder, "cuisine_fix_script.R"))
-file.copy("create_final_food_visualization.R", file.path(report_folder, "visualization_script.R"))
+file.copy("scripts/data_cleaning_script.R", file.path(report_folder, "data_cleaning_script.R"), overwrite = TRUE)
+file.copy("scripts/cuisine_fix_script.R", file.path(report_folder, "cuisine_fix_script.R"), overwrite = TRUE)
+file.copy("scripts/visualization_script.R", file.path(report_folder, "visualization_script.R"), overwrite = TRUE)
 
-# Copy KML files
-file.copy("chinatown_kml_original.geojson", file.path(report_folder, "kml_original.geojson"))
-file.copy("chinatown_kml_50m_buffer.geojson", file.path(report_folder, "kml_50m_buffer.geojson"))
+file.copy("geographic/kml_original.geojson", file.path(report_folder, "kml_original.geojson"), overwrite = TRUE)
+file.copy("geographic/kml_50m_buffer.geojson", file.path(report_folder, "kml_50m_buffer.geojson"), overwrite = TRUE)
 
 cat("\n=== Comprehensive Report Created Successfully ===\n")
-cat("Report folder: london_chinatown_final_report/\n")
+cat("Report folder:", report_folder, "\n")
 cat("Generated files:\n")
 cat("- cultural_background_distribution.png - Cultural background pie chart\n")
 cat("- cuisine_distribution.png - Cuisine distribution bar chart\n")
@@ -366,7 +366,7 @@ cat("Cultural Shannon Diversity Index:", round(diversity$culture_shannon, 3), "\
 cat("Cuisine Simpson Diversity Index:", round(diversity$cuisine_simpson, 3), "\n")
 cat("Cuisine Shannon Diversity Index:", round(diversity$cuisine_shannon, 3), "\n")
 
-return(list(
+invisible(list(
   pie_chart = pie_chart,
   bar_chart = bar_chart,
   type_chart = type_chart,
