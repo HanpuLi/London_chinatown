@@ -156,6 +156,12 @@ if f'version: "{version}"' not in citation or 'date-released: "2026-09-19"' not 
 if "v2026.09.19" not in readme:
     errors.append("README does not identify the citable release snapshot")
 
+index_html = (ROOT / "index.html").read_text(encoding="utf-8", errors="replace")
+if "<title>London Chinatown Food &amp; Beverage Analysis</title>" not in index_html:
+    errors.append("index.html lost the production page title")
+if 'name="viewport"' not in index_html or 'name="description"' not in index_html:
+    errors.append("index.html lost viewport/description metadata")
+
 if errors:
     raise SystemExit("\n".join(errors))
 
