@@ -127,8 +127,8 @@
 - 选择 "main" 分支
 
 ### 2. 访问在线版本
-- 报告：`https://lyundiplye.github.io/London_chinatown/comprehensive_analysis_report.html`
-- 地图：`https://lyundiplye.github.io/London_chinatown/interactive_map.html`
+- 报告：`https://hanpuli.github.io/London_chinatown/reports/comprehensive_analysis_report.html`
+- 地图：`https://hanpuli.github.io/London_chinatown/reports/interactive_map.html`
 
 ### 3. 更新README
 - 添加在线链接

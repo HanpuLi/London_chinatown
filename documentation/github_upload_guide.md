@@ -12,7 +12,7 @@
 2. **创建新仓库**
    - 打开GitHub Desktop
    - 点击 "Create a New Repository on GitHub"
-   - 仓库名称：`london-chinatown-analysis`
+   - 仓库名称：`London_chinatown`
    - 描述：`Comprehensive analysis of food & beverage diversity in London Chinatown`
    - 选择 "Public" 或 "Private"
    - 点击 "Create repository"
@@ -43,7 +43,7 @@
 
 3. **连接到GitHub**
    ```bash
-   git remote add origin https://github.com/YOUR_USERNAME/london-chinatown-analysis.git
+   git remote add origin https://github.com/YOUR_USERNAME/London_chinatown.git
    git branch -M main
    git push -u origin main
    ```
@@ -53,7 +53,7 @@
 #### 步骤：
 1. **创建新仓库**
    - 访问：https://github.com/new
-   - 仓库名称：`london-chinatown-analysis`
+   - 仓库名称：`London_chinatown`
    - 描述：`Comprehensive analysis of food & beverage diversity in London Chinatown`
    - 选择 "Public"
    - 点击 "Create repository"
@@ -68,10 +68,10 @@
 
 ### 建议的GitHub仓库结构：
 ```
-london-chinatown-analysis/
+London_chinatown/
 ├── README.md
-├── comprehensive_analysis_report.html
-├── interactive_map.html
+├── reports/comprehensive_analysis_report.html
+├── reports/interactive_map.html
 ├── interactive_map_files/
 ├── data/
 │   ├── food_data.csv
@@ -108,8 +108,8 @@ london-chinatown-analysis/
 - 点击 "Save"
 
 ### 2. 访问在线版本
-- 在线报告：`https://YOUR_USERNAME.github.io/london-chinatown-analysis/comprehensive_analysis_report.html`
-- 交互式地图：`https://YOUR_USERNAME.github.io/london-chinatown-analysis/interactive_map.html`
+- 在线报告：`https://YOUR_USERNAME.github.io/London_chinatown/reports/comprehensive_analysis_report.html`
+- 交互式地图：`https://YOUR_USERNAME.github.io/London_chinatown/reports/interactive_map.html`
 
 ### 3. 更新README
 - 添加在线链接到README.md
@@ -120,8 +120,8 @@ london-chinatown-analysis/
 
 ### 必需文件：
 - [x] README.md
-- [x] comprehensive_analysis_report.html
-- [x] interactive_map.html
+- [x] reports/comprehensive_analysis_report.html
+- [x] reports/interactive_map.html
 - [x] interactive_map_files/ (文件夹)
 - [x] food_data.csv
 - [x] all_osm_rawdata.csv

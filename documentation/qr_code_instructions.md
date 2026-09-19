@@ -12,7 +12,7 @@
 
 2. 输入链接内容：
    ```
-   file:///path/to/london_chinatown_final_report/interactive_map.html
+   file:///path/to/london_chinatown_final_report/reports/interactive_map.html
    ```
 
 3. 生成并下载PNG格式的二维码
@@ -23,7 +23,7 @@
 
 #### 直接访问链接：
 ```
-https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=file:///path/to/london_chinatown_final_report/interactive_map.html
+https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=file:///path/to/london_chinatown_final_report/reports/interactive_map.html
 ```
 
 #### 步骤：
@@ -46,7 +46,7 @@ qr = qrcode.QRCode(
 )
 
 # 添加数据
-qr.add_data('file:///path/to/london_chinatown_final_report/interactive_map.html')
+qr.add_data('file:///path/to/london_chinatown_final_report/reports/interactive_map.html')
 qr.make(fit=True)
 
 # 创建图片
@@ -65,7 +65,7 @@ img.save("interactive_map_qr_code.png")
 
 #### 输入内容：
 ```
-file:///path/to/london_chinatown_final_report/interactive_map.html
+file:///path/to/london_chinatown_final_report/reports/interactive_map.html
 ```
 
 ## 📱 二维码使用方法
@@ -97,7 +97,7 @@ file:///path/to/london_chinatown_final_report/interactive_map.html
 ## 📋 文件清单
 
 确保以下文件存在：
-- `interactive_map.html` - 交互式地图
+- `reports/interactive_map.html` - 交互式地图
 - `interactive_map_files/` - 地图支持文件
 - `interactive_map_qr_code.png` - 二维码图片
 
