@@ -31,7 +31,7 @@
 #### 步骤：
 1. **初始化Git仓库**
    ```bash
-   cd /Users/caitlye/Downloads/london_chinatown_final_report
+   cd ~/Downloads/london_chinatown_final_report
    git init
    ```
 
