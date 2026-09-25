@@ -4,6 +4,8 @@ A reproducible spatial snapshot of food-and-beverage establishments in London's 
 
 Live interactive map: https://hanpuli.github.io/London_chinatown/
 
+**Author:** [Hanpu Li / 李函璞](https://hanpuli.github.io/)
+
 ## Archived baseline
 
 The versioned analysis contains 146 food-and-beverage establishments:
