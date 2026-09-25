@@ -5,6 +5,7 @@ type: software
 authors:
   - family-names: Li
     given-names: Hanpu
+    website: "https://hanpuli.github.io/"
 repository-code: "https://github.com/HanpuLi/London_chinatown"
 url: "https://hanpuli.github.io/London_chinatown/"
 version: "2026.09.19"
